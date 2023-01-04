@@ -1,0 +1,12 @@
+micronaut:
+  application:
+    name: shopeen
+  server:
+    port: 8082
+    cors:
+      enabled: true
+netty:
+  default:
+    allocator:
+      max-order: 3
+mongodb.uri: mongodb://localhost:27017/shopeen-micro
