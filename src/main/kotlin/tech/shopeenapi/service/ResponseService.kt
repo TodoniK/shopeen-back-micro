@@ -6,13 +6,14 @@ import tech.shopeenapi.repository.ResponseRepository
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.exceptions.HttpStatusException
 import jakarta.inject.Singleton
+import tech.shopeenapi.entity.Bilan
 
 @Singleton
 class ResponseService(
     private val responseRepository: ResponseRepository
 ) {
 
-    fun create(response: ResponseDTO): Response {
+    fun createResponse(response: ResponseDTO): Response {
         val optionalResponse = responseRepository.existsById(response.idQuestion)
         return if(!optionalResponse){
             responseRepository.save(
@@ -23,20 +24,28 @@ class ResponseService(
         }
     }
 
-    fun findAll(): List<Response> =
+    fun getResponses(): List<Response> =
         responseRepository
             .findAll()
             .toList()
 
-    fun findById(id: String): Response =
-        responseRepository.findById(id)
-            .orElseThrow { HttpStatusException(HttpStatus.NOT_FOUND, "Response with id: $id was not found.") }
+    fun getResponseById(idQuestion: String): Response =
+        responseRepository.findById(idQuestion)
+            .orElseThrow { HttpStatusException(HttpStatus.NOT_FOUND, "Response with id: $idQuestion was not found.") }
 
 
-    fun deleteById(id: String) {
-        val foundUser = findById(id)
+    fun deleteResponse(idQuestion: String) {
+        val foundUser = getResponseById(idQuestion)
 
         responseRepository.delete(foundUser)
+    }
+
+    fun getBilan(): Bilan? {
+        return if(this.getResponses().isNotEmpty()){
+            Bilan().calculerBilan(this.getResponses())
+        }else {
+            null
+        }
     }
 
     private fun ResponseDTO.toResponseEntity(): Response {
@@ -44,7 +53,7 @@ class ResponseService(
         return Response(
             idQuestion = this.idQuestion,
             userResponse = this.userResponse,
-
+            consoMoy = this.consoMoy
         )
     }
 }

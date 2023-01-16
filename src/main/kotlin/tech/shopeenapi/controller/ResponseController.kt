@@ -8,6 +8,7 @@ import io.micronaut.http.HttpStatus.NO_CONTENT
 import io.micronaut.http.annotation.*
 import io.micronaut.scheduling.TaskExecutors
 import io.micronaut.scheduling.annotation.ExecuteOn
+import tech.shopeenapi.entity.Bilan
 
 @Controller("/api")
 @ExecuteOn(TaskExecutors.IO)
@@ -17,19 +18,23 @@ class ResponseController(
 
     @Get("/responses")
     fun getAllResponses(): List<Response> =
-        responseService.findAll()
+        responseService.getResponses()
 
     @Get("/responses/{id}")
     fun getResponseById(@PathVariable id: String): Response =
-        responseService.findById(id)
+        responseService.getResponseById(id)
 
     @Post("/responses")
     @Status(CREATED)
     fun createResponse(@Body request: ResponseDTO): Response =
-        responseService.create(request)
+        responseService.createResponse(request)
 
     @Delete("responses/{id}")
     @Status(NO_CONTENT)
     fun deleteResponseById(@PathVariable id: String) =
-        responseService.deleteById(id)
+        responseService.deleteResponse(id)
+
+    @Get("/bilan")
+    fun getBilan() : Bilan? =
+        responseService.getBilan()
 }

@@ -8,4 +8,5 @@ data class Response(
     @field:Id
     val idQuestion: String? = null,
     val userResponse: Int,
+    val consoMoy: Double
 )
