@@ -1,8 +1,8 @@
 package tech.shopeenapi.repository
 
-import tech.shopeenapi.entity.Response
 import io.micronaut.data.mongodb.annotation.MongoRepository
 import io.micronaut.data.repository.CrudRepository
+import tech.shopeenapi.dto.ResponseDTO
 
 @MongoRepository
-interface ResponseRepository : CrudRepository<Response, String>
+interface ResponseRepository : CrudRepository<ResponseDTO, String>

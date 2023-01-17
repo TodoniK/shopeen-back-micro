@@ -18,12 +18,12 @@ class ApplicationController(
     fun getApplicationsHistorical(): List<Application> =
         applicationService.getApplicationsHistorical()
 
-    @Get("/appli/{id}")
-    fun getApplicationHistoricalByName(@PathVariable id: String): List<Application> =
-        applicationService.getApplicationsHistoricalByName(id)
+    @Get("/appli/{nomApp}")
+    fun getApplicationHistoricalByName(@PathVariable nomApp: String): List<Application> =
+        applicationService.getApplicationsHistoricalByName(nomApp)
 
     @Post("/appli")
     @Status(CREATED)
-    fun postAppBilan(@Body app: ApplicationDTO): Application =
+    fun postAppBilan(@Body app: Application): Application? =
         applicationService.createApplicationHistorical(app)
 }

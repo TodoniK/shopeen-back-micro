@@ -36,7 +36,7 @@ dependencies {
 
 
 application {
-    mainClass.set("com.codersee.ApplicationKt")
+    mainClass.set("tech.shopeenapi.ApplicationKt")
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("17")
@@ -60,7 +60,7 @@ micronaut {
     testRuntime("junit5")
     processing {
         incremental(true)
-        annotations("com.codersee.*")
+        annotations("tech.shopeenapi.*")
     }
 }
 

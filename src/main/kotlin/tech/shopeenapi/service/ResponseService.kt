@@ -1,43 +1,46 @@
 package tech.shopeenapi.service
 
+import jakarta.inject.Singleton
 import tech.shopeenapi.dto.ResponseDTO
+import tech.shopeenapi.entity.Bilan
 import tech.shopeenapi.entity.Response
 import tech.shopeenapi.repository.ResponseRepository
-import io.micronaut.http.HttpStatus
-import io.micronaut.http.exceptions.HttpStatusException
-import jakarta.inject.Singleton
-import tech.shopeenapi.entity.Bilan
 
 @Singleton
 class ResponseService(
     private val responseRepository: ResponseRepository
 ) {
 
-    fun createResponse(response: ResponseDTO): Response {
+    fun getResponses(): List<Response> {
+        return responseRepository.findAll().map { it.toResponseEntity() }
+    }
+
+    fun createResponse(response: Response): Response {
         val optionalResponse = responseRepository.existsById(response.idQuestion)
-        return if(!optionalResponse){
-            responseRepository.save(
-                response.toResponseEntity()
-            )
+        return if(!optionalResponse){ responseRepository.save(response.toResponseDTO()).toResponseEntity()
         } else{
-            responseRepository.update(response.toResponseEntity())
+            responseRepository.update(response.toResponseDTO()).toResponseEntity()
         }
     }
 
-    fun getResponses(): List<Response> =
-        responseRepository
-            .findAll()
-            .toList()
+    fun getResponseById(idQuestion: String): Response? {
+        val optionalResponses = responseRepository.findById(idQuestion)
+        return if( optionalResponses.isPresent ) {
+            optionalResponses.get().toResponseEntity()
+        } else {
+            null
+        }
+    }
 
-    fun getResponseById(idQuestion: String): Response =
-        responseRepository.findById(idQuestion)
-            .orElseThrow { HttpStatusException(HttpStatus.NOT_FOUND, "Response with id: $idQuestion was not found.") }
+    fun deleteResponse(idQuestion: String): Boolean {
+        val exists = responseRepository.existsById(idQuestion)
 
-
-    fun deleteResponse(idQuestion: String) {
-        val foundUser = getResponseById(idQuestion)
-
-        responseRepository.delete(foundUser)
+        return if (exists) {
+            responseRepository.deleteById(idQuestion)
+            true
+        }else{
+            false
+        }
     }
 
     fun getBilan(): Bilan? {
@@ -48,12 +51,16 @@ class ResponseService(
         }
     }
 
-    private fun ResponseDTO.toResponseEntity(): Response {
-
-        return Response(
-            idQuestion = this.idQuestion,
-            userResponse = this.userResponse,
-            consoMoy = this.consoMoy
-        )
-    }
 }
+
+fun Response.toResponseDTO() = ResponseDTO(
+    idQuestion = this.idQuestion,
+    userResponse = this.userResponse,
+    consoMoy = this.consoMoy
+)
+
+fun ResponseDTO.toResponseEntity() = Response(
+    idQuestion = this.idQuestion,
+    userResponse = this.userResponse,
+    consoMoy = this.consoMoy
+)

@@ -4,10 +4,10 @@ import io.micronaut.data.mongodb.annotation.MongoFindQuery
 import io.micronaut.data.mongodb.annotation.MongoRepository
 import io.micronaut.data.repository.CrudRepository
 import org.bson.types.ObjectId
-import tech.shopeenapi.entity.Application
+import tech.shopeenapi.dto.ApplicationDTO
 
 @MongoRepository
-interface ApplicationRepository : CrudRepository<Application, ObjectId>{
+interface ApplicationRepository : CrudRepository<ApplicationDTO, ObjectId>{
     @MongoFindQuery("{idExtName: :name}")
-    fun findApplicationByIdExtName(name: String): List<Application>
+    fun findApplicationDTOByIdExtName(name: String): List<ApplicationDTO>
 }

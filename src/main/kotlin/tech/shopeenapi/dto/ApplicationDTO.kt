@@ -1,13 +1,17 @@
 package tech.shopeenapi.dto
 
+import io.micronaut.data.annotation.Id
+import io.micronaut.data.annotation.MappedEntity
 import org.bson.types.ObjectId
 import java.time.LocalDate
 
+@MappedEntity(value="application")
 data class ApplicationDTO(
-    var _id: ObjectId = ObjectId(),
-    val idExtName: String = "Default application name",
-    val bilanEuro: Int = 0,
-    val bilanCO2: Int = 0,
-    val bilanEnergy: Int = 0,
-    val measurementDate: LocalDate = LocalDate.now()
+    @field:Id
+    var idInterne: ObjectId = ObjectId(),
+    val idExtName: String,
+    val bilanEuro: Int,
+    val bilanCO2: Int,
+    val bilanEnergy: Int,
+    val measurementDate: String = LocalDate.now().toString()
 )
