@@ -8,7 +8,7 @@ plugins {
 }
 
 version = "0.1"
-group = "tech.shopeenapi"
+group = "com.orange.shopeenback"
 
 val kotlinVersion=project.properties.get("kotlinVersion")
 repositories {
@@ -23,6 +23,7 @@ dependencies {
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation("io.micronaut.data:micronaut-data-mongodb")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
+
     implementation("io.micronaut.mongodb:micronaut-mongo-sync")
     implementation("jakarta.annotation:jakarta.annotation-api")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
@@ -37,7 +38,7 @@ dependencies {
 
 
 application {
-    mainClass.set("tech.shopeenapi.ApplicationKt")
+    mainClass.set("com.orange.shopeenback.Application")
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("17")
@@ -61,7 +62,7 @@ micronaut {
     testRuntime("junit5")
     processing {
         incremental(true)
-        annotations("tech.shopeenapi.*")
+        annotations("com.orange.shopeenback.*")
     }
 }
 

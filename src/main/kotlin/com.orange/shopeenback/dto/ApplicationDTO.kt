@@ -1,4 +1,4 @@
-package tech.shopeenapi.dto
+package com.orange.shopeenback.dto
 
 import io.micronaut.data.annotation.Id
 import io.micronaut.data.annotation.MappedEntity

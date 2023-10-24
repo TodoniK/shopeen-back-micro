@@ -1,4 +1,4 @@
-package tech.shopeenapi.controller
+package com.orange.shopeenback.controller
 
 import io.micronaut.http.HttpStatus.CREATED
 import io.micronaut.http.annotation.*
@@ -7,9 +7,9 @@ import io.micronaut.scheduling.annotation.ExecuteOn
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
-import tech.shopeenapi.dto.ApplicationDTO
-import tech.shopeenapi.entity.Application
-import tech.shopeenapi.service.ApplicationService
+import com.orange.shopeenback.dto.ApplicationDTO
+import com.orange.shopeenback.entity.Application
+import com.orange.shopeenback.service.ApplicationService
 
 @Controller("/api")
 @ExecuteOn(TaskExecutors.IO)

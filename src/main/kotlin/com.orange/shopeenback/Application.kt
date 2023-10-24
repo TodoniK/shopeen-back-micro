@@ -1,4 +1,4 @@
-package tech.shopeenapi
+package com.orange.shopeenback
 
 import io.micronaut.runtime.Micronaut.run
 import io.swagger.v3.oas.annotations.OpenAPIDefinition

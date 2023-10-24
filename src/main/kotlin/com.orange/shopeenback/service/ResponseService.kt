@@ -1,10 +1,10 @@
-package tech.shopeenapi.service
+package com.orange.shopeenback.service
 
 import jakarta.inject.Singleton
-import tech.shopeenapi.dto.ResponseDTO
-import tech.shopeenapi.entity.Bilan
-import tech.shopeenapi.entity.Response
-import tech.shopeenapi.repository.ResponseRepository
+import com.orange.shopeenback.dto.ResponseDTO
+import com.orange.shopeenback.entity.Bilan
+import com.orange.shopeenback.entity.Response
+import com.orange.shopeenback.repository.ResponseRepository
 
 @Singleton
 class ResponseService(

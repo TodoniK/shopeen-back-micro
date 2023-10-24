@@ -1,2 +1,2 @@
-rootProject.name="shopeen"
+rootProject.name="shopeenback"
 

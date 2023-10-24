@@ -1,5 +1,5 @@
 applicationType: default
-defaultPackage: tech.shopeenapi
+defaultPackage: com.orange.shopeenback
 testFramework: junit
 sourceLanguage: kotlin
 buildTool: gradle_kotlin
