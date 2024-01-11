@@ -16,6 +16,21 @@ class ConfigurationService(private val configurationRepository: ConfigurationRep
         }
         return configurationOptional.get().toDTO()
     }
+
+    fun updateConfiguration(configurationId: ObjectId, configurationDTO: ConfigurationDTO): ConfigurationDTO {
+        val configurationOptional: Optional<Configuration> = configurationRepository.findById(configurationId)
+        if (!configurationOptional.isPresent) {
+            throw RuntimeException("Configuration not found")
+        }
+        val configuration = configurationOptional.get()
+        configuration.nbConteneurs = configurationDTO.nbConteneurs
+        configuration.nbProcesseurs = configurationDTO.nbProcesseurs
+        configuration.nbPC = configurationDTO.nbPC
+        configuration.nbMoniteurs = configurationDTO.nbMoniteurs
+        configuration.nbDev = configurationDTO.nbDev
+        configurationRepository.update(configuration)
+        return configuration.toDTO()
+    }
 }
 
 fun Configuration.toDTO() = ConfigurationDTO(

@@ -35,8 +35,6 @@ dependencies {
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 }
 
-
-
 application {
     mainClass.set("com.orange.shopeenback.Application")
 }

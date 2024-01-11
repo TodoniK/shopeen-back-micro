@@ -26,4 +26,15 @@ class ConfigurationController(private val configurationService: ConfigurationSer
         val configuration = configurationService.getConfiguration(id)
         return HttpResponse.ok(configuration)
     }
+
+    @Get("/configuration/update/{id}")
+    @Operation(summary = "Update a configuration", description = "Update a configuration by its ID.")
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "200", description = "Configuration updated"),
+        ApiResponse(responseCode = "404", description = "Configuration not found")
+    ])
+    fun updateConfiguration(@PathVariable id: ObjectId, configurationDTO: ConfigurationDTO): HttpResponse<ConfigurationDTO> {
+        val configuration = configurationService.updateConfiguration(id, configurationDTO)
+        return HttpResponse.ok(configuration)
+    }
 }

@@ -22,4 +22,4 @@ netty:
   default:
     allocator:
       max-order: 3
-mongodb.uri: mongodb://localhost:27017/shopeen-back
+mongodb.uri: mongodb://localhost:27017/shopeen-database
