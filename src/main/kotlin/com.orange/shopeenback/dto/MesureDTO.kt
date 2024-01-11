@@ -9,5 +9,5 @@ data class MesureDTO(
     var chargeProcMoy: Double,
     var duree: Double,
     var horodate: String,
-    var application: ApplicationDTO? = null
+    var application: ApplicationDTO
 )
