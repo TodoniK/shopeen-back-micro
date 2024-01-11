@@ -2,7 +2,9 @@ package com.orange.shopeenback.repository
 
 import io.micronaut.data.mongodb.annotation.MongoRepository
 import io.micronaut.data.repository.CrudRepository
-import com.orange.shopeenback.dto.ResponseDTO
+import org.bson.types.ObjectId
+import com.orange.shopeenback.model.Configuration
 
 @MongoRepository
-interface ResponseRepository : CrudRepository<ResponseDTO, String>
+interface ConfigurationRepository : CrudRepository<Configuration, ObjectId>{
+}
