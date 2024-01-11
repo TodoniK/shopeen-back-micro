@@ -1,17 +1,11 @@
 package com.orange.shopeenback.dto
 
-import io.micronaut.data.annotation.Id
-import io.micronaut.data.annotation.MappedEntity
+import io.swagger.v3.oas.annotations.media.Schema
 import org.bson.types.ObjectId
-import java.time.LocalDate
 
-@MappedEntity(value="application")
+@Schema(description = "DTO pour les données de l'application.")
 data class ApplicationDTO(
-    @field:Id
-    var idInterne: ObjectId = ObjectId(),
-    val idExtName: String,
-    val bilanEuro: Int,
-    val bilanCO2: Int,
-    val bilanEnergy: Int,
-    val measurementDate: String = LocalDate.now().toString()
+    var id: ObjectId? = null,
+    var nomApp: String,
+    var configuration: ConfigurationDTO
 )
