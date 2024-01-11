@@ -5,18 +5,20 @@ import com.orange.shopeenback.dto.ConfigurationDTO
 import com.orange.shopeenback.model.Application
 import com.orange.shopeenback.model.Configuration
 import com.orange.shopeenback.repository.ApplicationRepository
+import com.orange.shopeenback.repository.ConfigurationRepository
 import jakarta.inject.Singleton
 import org.bson.types.ObjectId
 import java.util.*
 
 @Singleton
-class ApplicationService(private val applicationRepository: ApplicationRepository) {
-
+class ApplicationService(private val applicationRepository: ApplicationRepository, private val configurationRepository: ConfigurationRepository) {
     fun listAll(): List<ApplicationDTO> {
         return applicationRepository.findAll().map(Application::toDTO)
     }
 
     fun createApplication(applicationDTO: ApplicationDTO): ApplicationDTO {
+        val configuration = applicationDTO.configuration.toEntity()
+        configurationRepository.save(configuration)
         val application = applicationDTO.toEntity()
         applicationRepository.save(application)
         return application.toDTO()
@@ -31,6 +33,24 @@ class ApplicationService(private val applicationRepository: ApplicationRepositor
         application.nomApp = applicationDTO.nomApp
         applicationRepository.update(application)
         return application.toDTO()
+    }
+
+    fun deleteApplication(applicationId: ObjectId) {
+        applicationRepository.deleteById(applicationId)
+    }
+
+    fun getConfigurationOfAppFromId(applicationId: ObjectId) : ConfigurationDTO {
+        val applicationOptional: Optional<Application> = applicationRepository.findById(applicationId)
+        if(!applicationOptional.isPresent) {
+            throw RuntimeException("Application not found")
+        } else {
+            val configId = applicationOptional.get().configuration.id
+            val configurationOptional: Optional<Configuration> = configurationRepository.findById(configId)
+            if(!configurationOptional.isPresent) {
+                throw RuntimeException("Configuration not found")
+            }
+            return configurationOptional.get().toDTO()
+        }
     }
 }
 
