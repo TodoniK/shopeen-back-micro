@@ -14,11 +14,11 @@ data class Configuration(
     @field:Schema(description = "Nombre de conteneurs")
     var nbConteneurs: Int,
 
-    @field:Schema(description = "Nombre de processeurs")
-    var nbProcesseurs: Int,
+    @field:Schema(description = "Unités de temps CPU maximum que le conteneur peut utiliser")
+    var quotaCPU: Int,
 
-    @field:Schema(description = "Nombre de PC developpeurs")
-    var nbPC: Int,
+    @field:Schema(description = "Nombre de PC développeurs")
+    var nbOrdisDev: Int,
 
     @field:Schema(description = "Nombre de moniteurs")
     var nbMoniteurs: Int,

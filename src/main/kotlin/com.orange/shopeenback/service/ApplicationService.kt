@@ -74,8 +74,8 @@ fun ConfigurationDTO.toEntity(): Configuration {
     return Configuration(
         id = this.id ?: ObjectId(),
         nbConteneurs = this.nbConteneurs,
-        nbProcesseurs = this.nbProcesseurs,
-        nbPC = this.nbPC,
+        quotaCPU = this.quotaCPU,
+        nbOrdisDev = this.nbOrdisDev,
         nbMoniteurs = this.nbMoniteurs,
         nbDev = this.nbDev
     )
