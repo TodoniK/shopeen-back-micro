@@ -24,8 +24,8 @@ class ConfigurationService(private val configurationRepository: ConfigurationRep
         }
         val configuration = configurationOptional.get()
         configuration.nbConteneurs = configurationDTO.nbConteneurs
-        configuration.quotaCPU = configurationDTO.quotaCPU
-        configuration.nbOrdisDev = configurationDTO.nbOrdisDev
+        configuration.nbProcesseurs = configurationDTO.nbProcesseurs
+        configuration.nbPC = configurationDTO.nbPC
         configuration.nbMoniteurs = configurationDTO.nbMoniteurs
         configuration.nbDev = configurationDTO.nbDev
         configurationRepository.update(configuration)
@@ -36,8 +36,8 @@ class ConfigurationService(private val configurationRepository: ConfigurationRep
 fun Configuration.toDTO() = ConfigurationDTO(
     id = this.id,
     nbConteneurs = this.nbConteneurs,
-    quotaCPU = this.quotaCPU,
-    nbOrdisDev = this.nbOrdisDev,
+    nbProcesseurs = this.nbProcesseurs,
+    nbPC = this.nbPC,
     nbMoniteurs = this.nbMoniteurs,
     nbDev = this.nbDev
 )

@@ -7,8 +7,8 @@ import org.bson.types.ObjectId
 data class ConfigurationDTO(
     var id : ObjectId? = null,
     var nbConteneurs: Int,
-    var quotaCPU: Int,
-    var nbOrdisDev: Int,
+    var nbProcesseurs: Int,
+    var nbPC: Int,
     var nbMoniteurs: Int,
     var nbDev: Int
 )
